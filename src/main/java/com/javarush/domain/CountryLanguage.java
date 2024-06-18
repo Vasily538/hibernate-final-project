@@ -6,20 +6,23 @@ import org.hibernate.annotations.Type;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "Country_language", schema = "world")
+@Table(schema = "world", name = "country_language")
 public class CountryLanguage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
+
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
-    @Column(name = "language", length = 30, nullable = false)
+
     private String language;
-    @Column(name = "language", columnDefinition = "tinyint(1)", nullable = false)
+
+    @Column(name = "is_official", columnDefinition = "BIT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean isOfficial;
-    @Column(name = "language", length = 4, precision = 1, nullable = false)
+    private Boolean isOfficial;
+
     private BigDecimal percentage;
 
     public Integer getId() {
@@ -46,11 +49,11 @@ public class CountryLanguage {
         this.language = language;
     }
 
-    public boolean isOfficial() {
+    public Boolean getOfficial() {
         return isOfficial;
     }
 
-    public void setOfficial(boolean official) {
+    public void setOfficial(Boolean official) {
         isOfficial = official;
     }
 

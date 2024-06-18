@@ -3,20 +3,22 @@ package com.javarush.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "city", schema = "world")
+@Table(schema = "world", name = "city")
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "name", length = 35, nullable = false)
+
     private String name;
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
-    @Column(name = "name", length = 35, nullable = false)
-    private String distinct;
-    @Column(name = "name", length = 35, nullable = false)
-    private int population;
+
+    private String district;
+
+    private Integer population;
+
 
     public Integer getId() {
         return id;
@@ -42,19 +44,19 @@ public class City {
         this.country = country;
     }
 
-    public String getDistinct() {
-        return distinct;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setDistinct(String distinct) {
-        this.distinct = distinct;
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
-    public int getPopulation() {
+    public Integer getPopulation() {
         return population;
     }
 
-    public void setPopulation(int population) {
+    public void setPopulation(Integer population) {
         this.population = population;
     }
 }
